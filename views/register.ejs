@@ -1,0 +1,28 @@
+<% include ./partials/header %> 
+<h1>Register!</h1>
+
+<form action="/register" method="POST">
+    <label for="username">Username</label>
+    <input type="text" name="username" placeholder="username" required>
+    
+    <label for="email">Email</label>
+    <input type="text" name="email" placeholder="email" required>
+    
+    <label for="name">Name</label>
+    <input type="text" name="name" placeholder="full name" required>
+    
+    <label for="age">Age</label>
+    <input type="number" name="age" placeholder="age" required>
+    
+    <label for="height">Height</label>
+    <input type="number" name="height" placeholder="height" step="any" required>
+    
+    <label for="weight">Weight</label>
+    <input type="number" name="weight" placeholder="weight" step="any" required>
+    
+    <label for="password">Password</label>
+    <input type="password" name="password" placeholder="password" required>
+    
+    <button>Register</button>
+</form>
+<% include ./partials/footer %> 

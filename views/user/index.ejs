@@ -1,0 +1,46 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <section class="row">
+        <div class="col-md-8">
+            <h1>User Profile Home Page</h1>
+            <h4>Welcome <%= currentUser.username %>!</h4>
+        </div>
+        <div class="col-md-4">
+            <div class="btn-group float-right mt-2" role="group">
+                <a class="btn btn-secondary btn-md" href="/meals/new">
+                    <i class="fa fa-plus" aria-hidden="true"></i>Add Meal
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<div class="container">
+    <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+        <% meals.forEach(function(meal){ %>
+            <div class="col-md-3 col-sm-6">
+                <div class="thumbnail">
+                   <div class="caption">
+                       <h5><%= meal.title %></h5>
+                   </div>
+                   <h6><%= meal.type %></h6>
+                   <h6>Calories: <%= meal.calories %>g</h6>
+                   <h6>Carbs: <%= meal.carbs %>g</h6>
+                   <h6>Fats:<%= meal.fats %>g</h6>
+                   <h6>Protein:<%= meal.protein %>g</h6>
+                   <h6>Sugar:<%= meal.sugar %></h6>
+                   <h6>Sodium:<%= meal.sodium %></h6>
+                   <p>
+                       <a href="/meals/<%= meal._id %>/edit" class="btn btn-primary">More Info</a>
+                   </p>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+</div>
+
+
+
+<% include ../partials/footer %>
