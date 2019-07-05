@@ -11,6 +11,6 @@ var UserSchema = new mongoose.Schema({
     weight: Number
 });
 
-UserSchema.plugin(passportLocalMongoose)
+UserSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model("User", UserSchema);

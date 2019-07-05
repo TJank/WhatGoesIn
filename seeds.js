@@ -1,4 +1,4 @@
-var mongoose = require("mongoose");
+var mysql = require("mysql");
 var User = require("./models/user");
 var Meal   = require("./models/meal");
 

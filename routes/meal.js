@@ -13,7 +13,7 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 //CREATE - add new meal to DB
 router.post("/", middleware.isLoggedIn, function(req, res){
     var d = new Date();
-    console.log(d);
+    console.log(req.body.carbs);
     
     // get data from form and add to campgrounds array
     var type = req.body.type;
@@ -26,12 +26,12 @@ router.post("/", middleware.isLoggedIn, function(req, res){
     var sodium = req.body.sodium;
     var date = d;
     var owner = {
-        id: req.user._id,
+        _id: req.user._id,
         username: req.user.username
-    }
+    };
     var newMeal = {title: title, type: type, calories: calories, carbs: carbs, fats: fats, protein: protein, sugar: sugar, sodium: sodium, date: d, owner: owner};
     // Create a new campground and save to DB
-    console.log(newMeal);
+    // console.log(newMeal);
     Meal.create(newMeal, function(err, newlyCreated){
         if(err){
             console.log(err);
@@ -55,6 +55,20 @@ router.get("/:id/edit", middleware.checkMealOwnership, function(req, res){
         }
     });
 });
+
+// UPDATE Meal ROUTE
+router.put("/:id",middleware.checkMealOwnership, function(req, res){
+    // find and update the correct meal
+    Meal.findByIdAndUpdate(req.params.id, req.body.meal, function(err, updatedMeal){
+       if(err){
+           res.redirect("back");
+       } else {
+           console.log(updatedMeal);
+           res.redirect("/user/" + req.user._id);
+       }
+    });
+});
+
 
 
 

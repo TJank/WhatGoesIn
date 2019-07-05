@@ -1,6 +1,7 @@
 var express     = require("express"),
     app         = express(),
     bodyParser  = require("body-parser"),
+	mysql		= require("mysql"),
     mongoose    = require("mongoose"),
     flash       = require("connect-flash"),
     passport    = require("passport"),
@@ -10,19 +11,24 @@ var express     = require("express"),
     User        = require("./models/user");
 
 // Handling mongoose errors:
-mongoose.set('useFindAndModify', false);
-
+// mongoose.set('useFindAndModify', false);
 // set up mongodb connection
-// mongoose.connect("mongodb://localhost/what_goes_in1");
-var url = "mongodb://localhost/what_goes_in3"; //process.env.DATABASEURL || 
+// mongoose.connect("mongodb+srv://<username>:<password>-goes-in-ckwdq.mongodb.net/test?retryWrites=true&w=majority");
+// var url = process.env.DATABASEURL || "mongodb+srv://<username>:<password>-goes-in-ckwdq.mongodb.net/test?retryWrites=true&w=majority"; 
+// mongoose.connect(url, {
+//     useNewUrlParser: true,
+//     useCreateIndex: true
+// }).then(() => {
+//     console.log("Connected to DB! ");
+// }).catch(err => {
+//     console.log("ERROR:", err.message);
+// });
 
-mongoose.connect(url, {
-    useNewUrlParser: true,
-    useCreateIndex: true
-}).then(() => {
-    console.log("Connected to DB! ");
-}).catch(err => {
-    console.log("ERROR:", err.message);
+var connection = mysql.createConnection({
+	host		: 'localhost',
+	user		: 'user',
+	password	: 'password',
+	database	: 'database'
 });
 // seedDB();
 
@@ -62,6 +68,6 @@ app.use("/", indexRoutes);
 app.use("/user", userRoutes);
 app.use("/meals", mealRoutes);
 
-app.listen(process.env.PORT, process.env.IP, function(){
-   console.log("WhatGoesIn has started up...");
+app.listen(3000, function(){
+   console.log("WhatGoesIn has started up... listening on port: 3000");
 });

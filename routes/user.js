@@ -3,32 +3,18 @@ var router  = express.Router();
 var User = require("../models/user");
 var Meal = require("../models/meal");
 var middleware = require("../middleware");
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost/what_goes_in3";
 
 // Load User's Home Page
 router.get("/:id", middleware.isLoggedIn, function(req, res){
-    // console.log(req.user);
-    
-    // Get all campgrounds from DB
-    // console.log(req.user._id);
-    // MongoClient.connect(url, { useNewUrlParser: true }, function(err, db) {
-    //     if (err) throw err;
-    //     var dbo = db.db("mydb");
-    //     dbo.collection("meals").find({owner: {id: req.user._id}}, function(err, result) {
-    //         if (err) throw err;
-    //         console.log(result);
-    //         db.close();
-    //     });
-    // }); 
+    // console.log(req.user); 
 
-    Meal.find({owner: {id: req.user._id}}, function(err, allMeals){
+    Meal.find({"owner.username" : req.user.username}, function(err, allMeals){
         if(err){
             console.log(err);
         } else {
             // res.render("user/index", {currentUser: req.user});
             // DO NOT NEED ^^^ because we defined currentUser as a global value
-            console.log(allMeals);
+            // console.log(allMeals);
             res.render("user/index",{meals:allMeals});
         }
     });
